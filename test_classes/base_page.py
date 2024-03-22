@@ -27,7 +27,9 @@ class BasePage:
         element.click()
         time.sleep(3)
         
-    def input(self, data, locator, locator_type):
+    def input(self, data, locator, locator_type, clear: bool = False):
         element = self.find(locator,locator_type)
+        if clear: 
+            element.clear()
         element.send_keys(data)
     

@@ -1,3 +1,10 @@
+from selenium import webdriver
+
+caminho_webdriver = r"C:\Users\Vinicius Ferraz\OneDrive\Documentos\ChromeDriver\chromedriver-win64\chromedriver-win64\chromedriver.exe"
+
+service = Service(caminho_webdriver)
+
+
 def setup_module(module):
     """setup any state specific to the execution of the given module."""
     pass
@@ -21,7 +28,7 @@ def teardown_function(function):
     pass
 
 def test_01():
-    pass
+    driver = 
 
 def test_02():
     pass
