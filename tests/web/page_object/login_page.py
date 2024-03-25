@@ -1,4 +1,4 @@
-from test_classes.base_page import BasePage
+from tests.web.page_object.base_page import BasePage
 from selenium.webdriver.common.by import By
 
 class LoginPage(BasePage):
@@ -9,7 +9,7 @@ class LoginPage(BasePage):
 
     user_email_input_locator = "user_email"
     user_password_input_locator = '//*[@id="user_password"]'
-    submit_button_locator = '//*[@id="new_user"]/div[2]/input'
+    submit_button_locator = '//*[@name="commit"]'
     login_successful_confirm_locator = '//p[.="Signed in successfully."]'
     login_unsuccessful_confirm_locator = '/html/body/div/h2'
 
@@ -19,9 +19,9 @@ class LoginPage(BasePage):
         self.click(locator=self.submit_button_locator, locator_type="XPATH")
 
     def get_login_confirmation_text(self):
-        element = self.wait(locator=self.login_successful_confirm_locator, locator_type="XPATH")
+        element = self.wait(locator=self.login_successful_confirm_locator, locator_type=By.XPATH)
         return element.text
 
     def get_login_unsuccessful_confirmation(self):
-        element = self.wait(locator=self.login_unsuccessful_confirm_locator, locator_type="XPATH")
+        element = self.wait(locator=self.login_unsuccessful_confirm_locator, locator_type=By.XPATH)
         return element.text

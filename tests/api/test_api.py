@@ -3,6 +3,7 @@ import requests
 
 BASE_URL = "https://test-bees.herokuapp.com"
 
+
 def test_get_deposits():
     response = requests.get(f'{BASE_URL}/deposits.json')
     assert response.status_code == 200
