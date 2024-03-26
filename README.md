@@ -1,4 +1,4 @@
-## Setup
+## Setup - run commands
 
 ```sh
 python -m venv venv
@@ -10,4 +10,10 @@ python -m venv venv
 
 ```sh
 python -m pip install -r requirements.txt
-``` 
+```
+
+## To generate reports, please run in the main pain projeto_bees
+
+```sh
+pytest tests  --html=report.html 
+```
