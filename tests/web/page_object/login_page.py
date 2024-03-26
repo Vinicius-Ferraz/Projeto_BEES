@@ -12,6 +12,11 @@ class LoginPage(BasePage):
     submit_button_locator = '//*[@name="commit"]'
     login_successful_confirm_locator = '//p[.="Signed in successfully."]'
     login_unsuccessful_confirm_locator = '/html/body/div/h2'
+    forgot_password_link_locator = '//a[.="Forgot your password?"]'
+    forgot_password_title_locator = '//h2[.="Forgot your password?"]'
+    email_input_forgot_password_locator = '//*[@id="user_email"]'
+    send_reset_password_button_locator = '//*[@name="commit"]'
+    get_password_reset_confirmation_locator = '//h2[.="Login"]'
 
     def login(self, email, password):
         self.input(data=email, locator=self.user_email_input_locator, locator_type="ID")
@@ -24,4 +29,20 @@ class LoginPage(BasePage):
 
     def get_login_unsuccessful_confirmation(self):
         element = self.wait(locator=self.login_unsuccessful_confirm_locator, locator_type=By.XPATH)
+        return element.text
+
+    def click_forgot_password(self):
+        self.wait(locator=self.submit_button_locator, locator_type=By.XPATH)
+        self.click(locator=self.forgot_password_link_locator, locator_type=By.XPATH)
+
+    def input_email_forgot_password(self, email):
+        self.wait(locator=self.email_input_forgot_password_locator, locator_type=By.XPATH)
+        self.input(data=email.get('email', ''), locator=self.email_input_forgot_password_locator, locator_type=By.XPATH)
+
+    def click_send_reset_password(self):
+        self.wait(locator=self.send_reset_password_button_locator, locator_type=By.XPATH)
+        self.click(locator=self.send_reset_password_button_locator, locator_type=By.XPATH)
+
+    def get_password_reset_confirmation(self):
+        element = self.wait(locator=self.get_password_reset_confirmation_locator, locator_type=By.XPATH)
         return element.text

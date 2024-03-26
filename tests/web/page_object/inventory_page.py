@@ -22,11 +22,13 @@ class InventoryPage(BasePage):
     destroy_inventory_button_locator = '//button[.="Destroy this inventory"]'
     edit_this_inventory_button_locator = '//a[.="Edit this inventory"]'
     update_inventory_button_locator = '//input[@name="commit"]'
-    confirmation_update_success_locator = '/html/body/div/p'
+    update_success_confirmation_locator = '/html/body/div/p'
     error_blank_item_locator = '//*[@id="new_inventory"]/div[2]/div[1]/div'
     error_blank_deposit_locator = '//*[@id="new_inventory"]/div[2]/div[2]/div'
     error_item_already_taken_locator = '//*[@id="new_inventory"]/div[2]/div[1]/div'
     error_deposit_already_taken_locator = '//*[@id="new_inventory"]/div[2]/div[2]/div'
+    destroy_inventory_confirmation_text = '//p[.="Inventory was successfully destroyed."]'
+
 
 # Methods:
 
@@ -48,12 +50,11 @@ class InventoryPage(BasePage):
         self.wait(locator=self.validation_tittle_new_inventory_page_locator, locator_type=By.XPATH)
         self.dropdown_select(locator=self.select_item_dropdown_locator, locator_type=By.XPATH, text='item_taken')
         self.dropdown_select(locator=self.select_deposit_dropdown_locator, locator_type=By.XPATH, text='Capybara')
-        self.input(data=item_count, locator=self.input_quantity_locator, locator_type=By.XPATH)
+        self.input(data=item_count.get('Item count', ''), locator=self.input_quantity_locator, locator_type=By.XPATH)
 
     def get_item_taken_error(self):
         element = self.wait(locator=self.error_item_already_taken_locator, locator_type=By.XPATH)
         return element.text
-
 
     def create_new_inventory_with_taken_deposit(self, item_count):
         self.wait(locator=self.validation_tittle_new_inventory_page_locator, locator_type=By.XPATH)
@@ -64,7 +65,6 @@ class InventoryPage(BasePage):
     def get_deposit_taken_error(self):
         element = self.wait(locator=self.error_deposit_already_taken_locator, locator_type=By.XPATH)
         return element.text
-
 
     def create_inventory_blank(self):
         self.wait(locator=self.validation_tittle_new_inventory_page_locator, locator_type=By.XPATH)
@@ -99,6 +99,10 @@ class InventoryPage(BasePage):
         self.wait(locator=self.destroy_inventory_button_locator, locator_type=By.XPATH)
         self.click(locator=self.destroy_inventory_button_locator, locator_type=By.XPATH)
 
+    def get_destroy_inventory_confirmation_text(self):
+        element = self.wait(locator=self.destroy_inventory_confirmation_text, locator_type=By.XPATH)
+        return element.text
+
     def click_show_this_inventory(self):
         self.wait(locator=self.show_this_deposit_locator, locator_type=By.XPATH)
         self.click(locator=self.show_this_deposit_locator, locator_type=By.XPATH)
@@ -113,5 +117,7 @@ class InventoryPage(BasePage):
         self.click(locator=self.update_inventory_button_locator, locator_type=By.XPATH)
 
     def get_update_confirmation_text(self):
-        element = self.wait(locator=self.confirmation_update_success_locator, locator_type=By.XPATH)
+        element = self.wait(locator=self.update_success_confirmation_locator, locator_type=By.XPATH)
         return element.text
+
+

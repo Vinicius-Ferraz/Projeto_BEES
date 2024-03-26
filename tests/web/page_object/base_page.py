@@ -38,11 +38,6 @@ class BasePage:
         element = wait.until(EC.presence_of_element_located((locator_type, locator)))
         return element
 
-    #def dropdown_select(self, locator, locator_type, value):
-    #    element = self.find(locator, locator_type)
-    #    select = Select(element)
-    #    select.select_by_visible_text(value)
-    #    self.click(select)
 
     def dropdown_select(self, locator, locator_type, text):
         element = self.wait_for_element(locator, locator_type)
